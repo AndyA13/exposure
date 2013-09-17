@@ -17,6 +17,7 @@ exposure-user:
     - name: exposure
     - password: exposure
     - runas: postgres
+    - superuser: True
     - require:
         - pkg: postgresql-pkgs
 

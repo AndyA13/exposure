@@ -1,6 +1,9 @@
 # Django settings for exposure project.
 
-from os import environ
+from os import environ, path
+from sys import path as syspath
+
+syspath.append(path.dirname(__file__) + "/../apps/")
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -137,9 +140,9 @@ SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3.S3Storage'
 
-AWS_ACCESS_KEY_ID = environ['AWS_ACCESS_KEY_ID']
-AWS_SECRET_ACCESS_KEY = environ['AWS_SECRET_ACCESS_KEY']
-AWS_STORAGE_BUCKET_NAME = environ['AWS_STORAGE_BUCKET_NAME']
+# AWS_ACCESS_KEY_ID = environ['AWS_ACCESS_KEY_ID']
+# AWS_SECRET_ACCESS_KEY = environ['AWS_SECRET_ACCESS_KEY']
+# AWS_STORAGE_BUCKET_NAME = environ['AWS_STORAGE_BUCKET_NAME']
 
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
