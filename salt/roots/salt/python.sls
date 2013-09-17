@@ -42,7 +42,7 @@ virtualenvwrapper:
 /home/vagrant/.virtualenvs/exposure/:
   virtualenv.managed:
     - no_site_packages: True
-    - requirements: /vagrant/requirements/base.txt
+    - requirements: /vagrant/requirements.txt
     - require:
         - pip: virtualenvwrapper
     - runas: vagrant
