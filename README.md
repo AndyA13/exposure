@@ -8,6 +8,7 @@ Setup
 
 1. Install Postgres
 2. mkvirtualenv exposure && pip install -r requiremens.txt
+2. Copy exposure/settings_local.py.example to exposure/settings_local.py and customise.
 3. ./manage.py syncdb
 4. ./manage.py migrate
 5. ./manage.py runserver
