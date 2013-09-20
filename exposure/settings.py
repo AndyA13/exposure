@@ -5,7 +5,7 @@ from sys import path as syspath
 
 syspath.append(path.dirname(__file__) + "/../apps/")
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
