@@ -130,6 +130,8 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 
     # Third party.
+    'easy_thumbnails',
+    'south',
     'storages',
 
     # Out stuff.
@@ -138,13 +140,28 @@ INSTALLED_APPS = (
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3.S3Storage'
 
-# AWS_ACCESS_KEY_ID = environ['AWS_ACCESS_KEY_ID']
-# AWS_SECRET_ACCESS_KEY = environ['AWS_SECRET_ACCESS_KEY']
-# AWS_STORAGE_BUCKET_NAME = environ['AWS_STORAGE_BUCKET_NAME']
+try:
+    AWS_ACCESS_KEY_ID = environ['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY = environ['AWS_SECRET_ACCESS_KEY']
+    AWS_STORAGE_BUCKET_NAME = environ['AWS_STORAGE_BUCKET_NAME']
+except KeyError:
+    raise Exception("Missing AWS credentials. Environment variables \
+        AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY and AWS_STORAGE_BUCKET_NAME must be set.")
 
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+# Easy-thumbnails options
+THUMBNAIL_DEFAULT_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+THUMBNAIL_SUBDIR = 'thumbnails'
+THUMBNAIL_ALIASES = {
+    '': {
+        'small-photo': {'size': (100, 100), 'crop': True},
+        'medium-photo': {'size': (500, 500), 'crop': True},
+        'large-photo': {'size': (1000, 1000), 'crop': True}
+    },
+}
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
