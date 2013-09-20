@@ -1,4 +1,4 @@
-# Django settings for exposure project.
+from __future__ import absolute_import
 
 from os import environ, path
 from sys import path as syspath
@@ -193,6 +193,6 @@ LOGGING = {
 }
 
 try:
-    from settings_local import *
+    from .settings_local import *
 except ImportError:
     pass
