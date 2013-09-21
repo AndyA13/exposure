@@ -2,3 +2,7 @@ nav ul li {
 	display: inline;
 	list-style: none;
 }
+
+.text-right {
+	text-align: right;
+}
