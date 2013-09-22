@@ -6,7 +6,7 @@ from sys import path as syspath
 PROJECT_DIRECTORY = path.abspath(path.dirname(__file__)) + "/.."
 syspath.append(path.join(PROJECT_DIRECTORY, "apps/"))
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (

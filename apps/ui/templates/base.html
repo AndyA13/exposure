@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Exposure</title>
 
-    <link href="{{ STATIC_URL}}/css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
-    <link href="css/site.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <link href="{{ STATIC_URL}}css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <link href="{{ STATIC_URL}}css/site.css" rel="stylesheet" media="all and (min-width: 1em)" />
 
     <!--[if lt IE 9 &!(IEMobile)]>
-    <link href="css/responsive-legacy.css" rel="stylesheet" />
-    <script src="scripts/vendor/html5shiv.js"></script>
+    <link href="{{ STATIC_URL}}css/responsive-legacy.css" rel="stylesheet" />
+    <script src="{{ STATIC_URL}}scripts/vendor/html5shiv.js"></script>
     <![endif]-->
 
 </head>
@@ -42,38 +42,80 @@
     <div class="container fixed">
 
         <div class="row">
-            <div class="column-3 gallery-item">
-                <div class="gallery-item-image">
-                    <img src="http://placehold.it/238x178" />
-                    <p>
+            <div class="column-12">
+
+                <div class="gallery-item">
+                    <div class="gallery-item-image">
+                        <img src="http://placehold.it/238x178" />
+                    </div>
+                    <div class="gallery-item-meta">
                         4:3 image in landscape
-                    </p>
+                    </div>
                 </div>
-            </div>
-            <div class="column-3 gallery-item">
-                <div class="gallery-item-image">
-                    <img src="http://placehold.it/238x317" />
-                    <p>
+
+                <div class="gallery-item">
+                    <div class="gallery-item-image">
+                        <img src="http://placehold.it/238x317" />
+                    </div>
+                    <div class="gallery-item-meta">
                         4:3 image in portrait
-                    </p>
+                    </div>
                 </div>
-            </div>
-            <div class="column-3 gallery-item">
-                <div class="gallery-item-image">
-                    <img src="http://placehold.it/238x178" />
-                    <p>
+
+                <div class="gallery-item">
+                    <div class="gallery-item-image">
+                        <img src="http://placehold.it/238x178" />
+                    </div>
+                    <div class="gallery-item-meta">
                         4:3 image in landscape
-                    </p>
+                    </div>
                 </div>
-            </div>
-            <div class="column-3 gallery-item">
-                <div class="gallery-item-image">
-                    <img src="http://placehold.it/238x317" />
-                    <p>
+
+                <div class="gallery-item">
+                    <div class="gallery-item-image">
+                        <img src="http://placehold.it/238x317" />
+                    </div>
+                    <div class="gallery-item-meta">
                         4:3 image in portrait
-                    </p>
+                    </div>
                 </div>
-            </div>
+
+                <div class="gallery-item">
+                    <div class="gallery-item-image">
+                        <img src="http://placehold.it/238x317" />
+                    </div>
+                    <div class="gallery-item-meta">
+                        4:3 image in portrait
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <div class="gallery-item-image">
+                        <img src="http://placehold.it/238x178" />
+                    </div>
+                    <div class="gallery-item-meta">
+                        4:3 image in landscape
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <div class="gallery-item-image">
+                        <img src="http://placehold.it/238x317" />
+                    </div>
+                    <div class="gallery-item-meta">
+                        4:3 image in portrait
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <div class="gallery-item-image">
+                        <img src="http://placehold.it/238x178" />
+                    </div>
+                    <div class="gallery-item-meta">
+                        4:3 image in landscape
+                    </div>
+                </div>
+                        
         </div>
 
     </div>
@@ -82,19 +124,19 @@
         <footer>
             <div class="column-12 text-right">
                 <p>
-                    &copy; site name 2013
+                    &copy; site name 2013 | Exposure
                 </p>
             </div>
         </footer>
     </div>
 
     <!--[if IE 8]>
-    <script src="scripts/vendor/jquery-1.10.2.min.js"></script>
+    <script src="{{ STATIC_URL}}scripts/vendor/jquery-1.10.2.min.js"></script>
     <![endif]-->
     <!--[if gt IE 8]><!-->
-    <script src="scripts/vendor/jquery-2.0.3.min.js"></script>
+    <script src="{{ STATIC_URL}}scripts/vendor/jquery-2.0.3.min.js"></script>
     <!--<![endif]-->
 
-    <script src="scripts/responsive.js"></script>
+    <script src="{{ STATIC_URL}}scripts/responsive.js"></script>
 </body>
 </html>
