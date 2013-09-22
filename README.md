@@ -17,8 +17,11 @@ Setup
 Configuration
 =============
 
-The following environment variables must be set.
+The following environment variables must be set for S3 support.
 
  - AWS_ACCESS_KEY_ID
  - AWS_SECRET_ACCESS_KEY
  - AWS_STORAGE_BUCKET_NAME
+
+There is one other environment variable that can be set, SENTRY_DSN to
+add support for getsentry.com.
