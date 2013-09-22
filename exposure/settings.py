@@ -75,9 +75,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    path.join(PROJECT_DIRECTORY, "static_files"),
 )
 
 # List of finder classes that know how to find static files in
@@ -137,6 +135,7 @@ INSTALLED_APPS = (
 
     # Out stuff.
     'photos',
+    'ui',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
@@ -147,8 +146,8 @@ try:
     AWS_SECRET_ACCESS_KEY = environ['AWS_SECRET_ACCESS_KEY']
     AWS_STORAGE_BUCKET_NAME = environ['AWS_STORAGE_BUCKET_NAME']
 except KeyError:
-    raise Exception("Missing AWS credentials. Environment variables \
-        AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY and AWS_STORAGE_BUCKET_NAME must be set.")
+    raise Exception("Missing AWS credentials. Environment variables AWS_ACCESS_KEY_ID, \
+        AWS_SECRET_ACCESS_KEY and AWS_STORAGE_BUCKET_NAME must be set.")
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
