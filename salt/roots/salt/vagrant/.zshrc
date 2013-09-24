@@ -41,4 +41,4 @@ source /usr/local/bin/virtualenvwrapper.sh;
 
 
 workon exposure;
-cd /vagrant/exposure;
+cd /vagrant/;
