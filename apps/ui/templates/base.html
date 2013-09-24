@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Exposure</title>
+
+    <link href="{{ STATIC_URL}}css/responsive.css" rel="stylesheet" media="all and (min-width: 1em)" />
+    <link href="{{ STATIC_URL}}css/site.css" rel="stylesheet" media="all and (min-width: 1em)" />
+
+    <!--[if lt IE 9 &!(IEMobile)]>
+    <link href="{{ STATIC_URL}}css/responsive-legacy.css" rel="stylesheet" />
+    <script src="{{ STATIC_URL}}scripts/vendor/html5shiv.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+    <header id="top">
+        <div class="container fixed">
+            <div class="row">
+                <div class="column-6">
+                    <h1><a href="#">Exposure</a></h1>
+                </div>
+                <div class="column-6 text-right">
+                    <nav>
+                        <ul>
+                            <li><a href="#">Menu Item</a></li>
+                            <li><a href="#">Menu Item</a></li>
+                            <li><a href="#">Menu Item</a></li>
+                            <li><a href="#">Menu Item</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    <div class="container fixed">
+
+       {% block content %}{% endblock %}
+
+    </div>
+
+    <div class="container fixed">
+        <footer>
+            <div class="column-12 text-right">
+                <p>
+                    &copy; Exposure 2013
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!--[if IE 8]>
+    <script src="{{ STATIC_URL}}scripts/vendor/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <script src="{{ STATIC_URL}}scripts/vendor/jquery-2.0.3.min.js"></script>
+    <!--<![endif]-->
+
+    <script src="{{ STATIC_URL}}scripts/responsive.js"></script>
+</body>
+</html>

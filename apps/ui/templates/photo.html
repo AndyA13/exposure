@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="row">
+
+	<div class="column-12">
+		<h2>Photo Name</h2>
+	</div>
+
+</div>
+
+<div class="row">
+
+	<div class="column-12">
+
+		<img src="http://placehold.it/1140x855" alt="image title" />
+
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="column-6">
+		Other photos in set
+	</div>
+	<div class="column-6 text-right">
+		Meta data (maybe)
+	</div>
+</div>
+
+<div class="row carousel set-preview" data-carousel-mode="slide" data-carousel-interval="0">
+
+	<div class="column-1">
+		<a class="preview-control left" href="#" data-carousel-slide="prev">&lsaquo;</a>
+	</div>
+
+	<div class="column-10">
+		<div class="carousel-inner">
+
+			<div class="row carousel-item carousel-active">
+				<div class="column-2">
+					<img src="http://placehold.it/142x142" />
+				</div>
+				<div class="column-2">
+					<img src="http://placehold.it/142x142" />
+				</div>
+				<div class="column-2">
+					<img src="http://placehold.it/142x142" />
+				</div>
+				<div class="column-2">
+					<img src="http://placehold.it/142x142" class="selected" />
+				</div>
+				<div class="column-2">
+					<img src="http://placehold.it/142x142" />
+				</div>
+				<div class="column-2">
+					<img src="http://placehold.it/142x142" />
+				</div>
+			</div>
+
+			<div class="row carousel-item">
+				<div class="column-2">
+					<img src="http://placehold.it/142x142" />
+				</div>
+				<div class="column-2">
+					<img src="http://placehold.it/142x142" />
+				</div>
+				<div class="column-2">
+					<img src="http://placehold.it/142x142" />
+				</div>
+				<div class="column-2">
+					<img src="http://placehold.it/142x142" />
+				</div>
+				<div class="column-2">
+					<img src="http://placehold.it/142x142" />
+				</div>
+				<div class="column-2">
+					<img src="http://placehold.it/142x142" />
+				</div>
+			</div>
+
+			<div class="row carousel-item">
+				<div class="column-2">
+					<img src="http://placehold.it/142x142" />
+				</div>
+				<div class="column-2">
+					<img src="http://placehold.it/142x142" />
+				</div>
+				<div class="column-2">
+					<img src="http://placehold.it/142x142" />
+				</div>
+				<div class="column-2">
+					<img src="http://placehold.it/142x142" />
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="column-1">
+		<a class="preview-control right" href="#" data-carousel-slide="next">&rsaquo;</a>
+	</div>
+
+</div>
+
+{% endblock %}
