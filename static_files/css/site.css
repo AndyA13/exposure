@@ -38,3 +38,21 @@ nav ul li {
 .text-right {
 	text-align: right;
 }
+
+.set-preview {
+    margin-top: 2em;
+}
+
+.carousel {
+    border: none !important;
+}
+
+.carousel-inner {
+    
+}
+
+.carousel-control {
+    padding: 0.5em !important;
+    margin: 0 !important;
+    position: relative !important;
+}
