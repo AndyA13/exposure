@@ -3,6 +3,8 @@ from __future__ import absolute_import
 from os import environ, path
 from sys import path as syspath
 
+import dj_database_url
+
 PROJECT_DIRECTORY = path.abspath(path.dirname(__file__)) + "/.."
 syspath.append(path.join(PROJECT_DIRECTORY, "apps/"))
 
@@ -16,20 +18,15 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'exposure',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': 'exposure',
-        'PASSWORD': 'exposure',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
-    }
+    'default': dj_database_url.config(),
 }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -71,13 +68,11 @@ STATIC_ROOT = path.join(PROJECT_DIRECTORY, "static")
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = '/static/'
+STATIC_URL = environ.get('STATIC_URL', '/static/')
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    path.join(PROJECT_DIRECTORY, "static_files"),
 )
 
 # List of finder classes that know how to find static files in
@@ -85,7 +80,6 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -95,7 +89,6 @@ SECRET_KEY = '!9gd*8oju330t!xn)+b@_s#+c&yc6@kql_@g$@1vq_ar1cjkw1'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -104,8 +97,8 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'exposure.urls'
@@ -131,13 +124,23 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 
     # Third party.
+    'debug_toolbar',
     'easy_thumbnails',
     'south',
     'storages',
 
     # Out stuff.
     'photos',
+    'ui',
 )
+
+try:
+    RAVEN_CONFIG = {
+        'dsn': environ['SENTRY_DSN'],
+    }
+    INSTALLED_APPS = INSTALLED_APPS + ('raven.contrib.django.raven_compat', )
+except KeyError:
+    print "Sentry disabled as SENTRY_DSN environment varaiable isn't set."
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
@@ -146,15 +149,17 @@ try:
     AWS_ACCESS_KEY_ID = environ['AWS_ACCESS_KEY_ID']
     AWS_SECRET_ACCESS_KEY = environ['AWS_SECRET_ACCESS_KEY']
     AWS_STORAGE_BUCKET_NAME = environ['AWS_STORAGE_BUCKET_NAME']
+
+    # Only change the backend if we have all of the above three.
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    THUMBNAIL_DEFAULT_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 except KeyError:
-    raise Exception("Missing AWS credentials. Environment variables \
-        AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY and AWS_STORAGE_BUCKET_NAME must be set.")
+    print "Missing AWS credentials. S3 storage is disabled, defaulting to filesystem."
+    print "AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY and AWS_STORAGE_BUCKET_NAME must be set for S3 support."
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
-# Easy-thumbnails options
-THUMBNAIL_DEFAULT_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    # Easy-thumbnails options
 THUMBNAIL_SUBDIR = 'thumbnails'
 THUMBNAIL_ALIASES = {
     '': {
@@ -192,6 +197,13 @@ LOGGING = {
             'propagate': True,
         },
     }
+}
+
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+    'SHOW_TOOLBAR_CALLBACK': lambda request: DEBUG,
+    'HIDE_DJANGO_SQL': False,
+    'ENABLE_STACKTRACES' : True,
 }
 
 try:
