@@ -14,7 +14,7 @@
 
 	<div class="column-12">
 
-		<img src="{{ MEDIA_URL }}{{ photo.image }}" alt="{{ photo.title }}" />
+		<img src="{{ MEDIA_URL }}{{ photo.size.large }}" alt="{{ photo.title }}" />
 
 	</div>
 
@@ -42,7 +42,7 @@
 			<div class="row carousel-item carousel-active">
 				{% for other_photo in photo.other_photos_in_set %}
 				<div class="column-2">
-					<img src="{{ MEDIA_URL }}{{ other_photo.image }}" />
+					<img src="{{ MEDIA_URL }}{{ other_photo.size.small }}" />
 				</div>
 				{% endfor %}
 			</div>

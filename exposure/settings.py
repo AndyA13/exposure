@@ -8,8 +8,13 @@ import dj_database_url
 PROJECT_DIRECTORY = path.abspath(path.dirname(__file__)) + "/.."
 syspath.append(path.join(PROJECT_DIRECTORY, "apps/"))
 
-DEBUG = False
+if 'DEBUG' in environ:
+    DEBUG = True
+else:
+    DEBUG = False
+
 TEMPLATE_DEBUG = DEBUG
+THUMBNAIL_DEBUG = DEBUG
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -58,7 +63,7 @@ MEDIA_ROOT = path.join(PROJECT_DIRECTORY, "media")
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://example.com/media/", "http://media.example.com/"
-MEDIA_URL = '/media/'
+MEDIA_URL = environ.get('S3_URL', '/media/')
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -68,7 +73,7 @@ STATIC_ROOT = path.join(PROJECT_DIRECTORY, "static")
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = environ.get('STATIC_URL', '/static/')
+STATIC_URL = environ.get('S3_URL', '/static/')
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -163,10 +168,9 @@ except KeyError:
 THUMBNAIL_SUBDIR = 'thumbnails'
 THUMBNAIL_ALIASES = {
     'photos': {
-        'small': {'size': (100, 100), 'crop': 'crop', 'quality': 80},
-        'medium': {'size': (500, 500), 'crop': 'crop', 'quality': 80},
-        'large': {'size': (1000, 1000), 'quality': 80},
-        'huge': {'size': (2000, 2000), 'quality': 80}
+        'admin': {'size': (150, 150), 'crop': 'crop'},
+        'small': {'size': (238, 317), 'crop': 'crop'},
+        'large': {'size': (1140, 1140)},
     },
 }
 
@@ -205,6 +209,12 @@ DEBUG_TOOLBAR_CONFIG = {
     'HIDE_DJANGO_SQL': False,
     'ENABLE_STACKTRACES' : True,
 }
+
+try:
+    DROPBOX_APP_KEY = environ['DROPBOX_APP_KEY']
+    DROPBOX_APP_SECRET = environ['DROPBOX_APP_SECRET']
+except KeyError:
+    print "Dropbox integration disabled."
 
 try:
     from .settings_local import *
