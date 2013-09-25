@@ -1,6 +1,7 @@
 argparse==1.2.1
 boto==2.13.3
 dj-database-url==0.2.2
+django-autoslug==1.7.1
 django-debug-toolbar==0.9.4
 django-storages==1.1.8
 Django==1.5.4
@@ -9,8 +10,11 @@ gunicorn==18.0
 honcho==0.4.2
 Jinja2==2.7
 MarkupSafe==0.18
-PIL==1.1.7
+Pillow==2.1.0
 psycopg2==2.5.1
 raven==3.4.1
 South==0.8.2
 wsgiref==0.1.2
+
+# For dev only, don't need versions.
+ipython

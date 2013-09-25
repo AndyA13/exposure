@@ -6,13 +6,24 @@
 
 	<div class="column-12">
 
-		<h2>Set Name Goes Here</h2>
+		<h2>{{ photo_set.name }}</h2>
 
 	</div>
-	
+
 </div>
 
 <div class="row column-list">
+
+	{% for photo in photo_list %}
+		<div class="gallery-item column-3">
+			<div class="gallery-item-image">
+				<img src="{{ MEDIA_URL }}{{ photo.image }}" alt="{{ photo.title }}" />
+			</div>
+			<div class="gallery-item-meta">
+				{{ photo.title }}
+			</div>
+		</div>
+	{% endfor %}
 
 	<div class="gallery-item column-3">
 		<div class="gallery-item-image">
@@ -85,7 +96,7 @@
 			4:3 image in portrain
 		</div>
 	</div>
-	
+
 </div>
 
 {% endblock %}

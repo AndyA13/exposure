@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 
-
 {% block content %}
 
 <div class="row">
 
 	<div class="column-12">
-		<h2>Photo Name</h2>
+		<h2>{{ photo.title }}</h2>
 	</div>
 
 </div>
@@ -15,7 +14,7 @@
 
 	<div class="column-12">
 
-		<img src="http://placehold.it/1140x855" alt="image title" />
+		<img src="{{ MEDIA_URL }}{{ photo.image }}" alt="{{ photo.title }}" />
 
 	</div>
 
@@ -30,6 +29,7 @@
 	</div>
 </div>
 
+{% if photo.photo_set %}
 <div class="row carousel set-preview" data-carousel-mode="slide" data-carousel-interval="0">
 
 	<div class="column-1">
@@ -40,24 +40,11 @@
 		<div class="carousel-inner">
 
 			<div class="row carousel-item carousel-active">
+				{% for other_photo in photo.other_photos_in_set %}
 				<div class="column-2">
-					<img src="http://placehold.it/142x142" />
+					<img src="{{ MEDIA_URL }}{{ other_photo.image }}" />
 				</div>
-				<div class="column-2">
-					<img src="http://placehold.it/142x142" />
-				</div>
-				<div class="column-2">
-					<img src="http://placehold.it/142x142" />
-				</div>
-				<div class="column-2">
-					<img src="http://placehold.it/142x142" class="selected" />
-				</div>
-				<div class="column-2">
-					<img src="http://placehold.it/142x142" />
-				</div>
-				<div class="column-2">
-					<img src="http://placehold.it/142x142" />
-				</div>
+				{% endfor %}
 			</div>
 
 			<div class="row carousel-item">
@@ -104,5 +91,6 @@
 	</div>
 
 </div>
+{% endif %}
 
 {% endblock %}

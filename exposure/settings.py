@@ -162,11 +162,11 @@ except KeyError:
     # Easy-thumbnails options
 THUMBNAIL_SUBDIR = 'thumbnails'
 THUMBNAIL_ALIASES = {
-    '': {
-        'small-photo': {'size': (100, 100), 'crop': True},
-        'medium-photo': {'size': (500, 500), 'crop': True},
-        'large-photo': {'size': (1000, 1000)},
-        'huge-photo': {'size': (2000, 2000)}
+    'photos': {
+        'small': {'size': (100, 100), 'crop': 'crop', 'quality': 80},
+        'medium': {'size': (500, 500), 'crop': 'crop', 'quality': 80},
+        'large': {'size': (1000, 1000), 'quality': 80},
+        'huge': {'size': (2000, 2000), 'quality': 80}
     },
 }
 
