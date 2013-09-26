@@ -5,87 +5,19 @@
 <div class="row column-list">
 
 	{% for photo in photo_list %}
-		<div class="gallery-item column-3">
+		<div class="gallery-item column-3 {% if forloop.counter0 > 0 and forloop.counter0|divisibleby:"4" %}reset{% endif %}">
 			<div class="gallery-item-image">
-				<img src="{{ MEDIA_URL }}{{ photo.size.small }}" alt="{{ photo.title }}" />
+				<a href="{% url 'ui.views.photo_detail' photo_set_slug=photo.photo_set.slug photo_slug=photo.slug %}">
+					<img src="{{ MEDIA_URL }}{{ photo.size.small}}" alt="{{ photo.title }}" />
+				</a>
 			</div>
 			<div class="gallery-item-meta">
-				{{ photo.title }}
+				<a href="{% url 'ui.views.photo_detail' photo.photo_set.slug photo.slug %}">
+					{{ photo.title }}
+				</a>
 			</div>
 		</div>
 	{% endfor %}
-
-	<div class="gallery-item column-3">
-		<div class="gallery-item-image">
-			<img src="http://placehold.it/238x178" />
-		</div>
-		<div class="gallery-item-meta">
-			4:3 image in landscape
-		</div>
-	</div>
-
-	<div class="gallery-item column-3">
-		<div class="gallery-item-image">
-			<img src="http://placehold.it/238x317" />
-		</div>
-		<div class="gallery-item-meta">
-			4:3 image in portrait
-		</div>
-	</div>
-
-	<div class="gallery-item column-3">
-		<div class="gallery-item-image">
-			<img src="http://placehold.it/238x178" />
-		</div>
-		<div class="gallery-item-meta">
-			4:3 image in landscape
-		</div>
-	</div>
-
-	<div class="gallery-item column-3">
-		<div class="gallery-item-image">
-			<img src="http://placehold.it/238x317" />
-		</div>
-		<div class="gallery-item-meta">
-			4:3 image in portrait
-		</div>
-	</div>
-
-	<div class="gallery-item reset column-3">
-		<div class="gallery-item-image">
-			<img src="http://placehold.it/238x317" />
-		</div>
-		<div class="gallery-item-meta">
-			4:3 image in portrait
-		</div>
-	</div>
-
-	<div class="gallery-item column-3">
-		<div class="gallery-item-image">
-			<img src="http://placehold.it/238x178" />
-		</div>
-		<div class="gallery-item-meta">
-			4:3 image in landscape
-		</div>
-	</div>
-
-	<div class="gallery-item column-3">
-		<div class="gallery-item-image">
-			<img src="http://placehold.it/238x317" />
-		</div>
-		<div class="gallery-item-meta">
-			4:3 image in portrait
-		</div>
-	</div>
-
-	<div class="gallery-item column-3">
-		<div class="gallery-item-image">
-			<img src="http://placehold.it/238x317" />
-		</div>
-		<div class="gallery-item-meta">
-			4:3 image in portrain
-		</div>
-	</div>
 
 </div>
 

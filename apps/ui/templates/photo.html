@@ -40,7 +40,7 @@
 		<div class="carousel-inner">
 
 			<div class="row carousel-item carousel-active">
-				{% for other_photo in photo.other_photos_in_set %}
+				{% for other_photo in photo.other_photos_in_set|slice:":4" %}
 				<div class="column-2">
 					<img src="{{ MEDIA_URL }}{{ other_photo.size.small }}" />
 				</div>
@@ -48,40 +48,21 @@
 			</div>
 
 			<div class="row carousel-item">
+				{% for other_photo in photo.other_photos_in_set|slice:"4:8" %}
 				<div class="column-2">
-					<img src="http://placehold.it/142x142" />
+					<img src="{{ MEDIA_URL }}{{ other_photo.size.small }}" />
 				</div>
-				<div class="column-2">
-					<img src="http://placehold.it/142x142" />
-				</div>
-				<div class="column-2">
-					<img src="http://placehold.it/142x142" />
-				</div>
-				<div class="column-2">
-					<img src="http://placehold.it/142x142" />
-				</div>
-				<div class="column-2">
-					<img src="http://placehold.it/142x142" />
-				</div>
-				<div class="column-2">
-					<img src="http://placehold.it/142x142" />
-				</div>
+				{% endfor %}
 			</div>
 
 			<div class="row carousel-item">
+				{% for other_photo in photo.other_photos_in_set|slice:"8:12" %}
 				<div class="column-2">
-					<img src="http://placehold.it/142x142" />
+					<img src="{{ MEDIA_URL }}{{ other_photo.size.small }}" />
 				</div>
-				<div class="column-2">
-					<img src="http://placehold.it/142x142" />
-				</div>
-				<div class="column-2">
-					<img src="http://placehold.it/142x142" />
-				</div>
-				<div class="column-2">
-					<img src="http://placehold.it/142x142" />
-				</div>
+				{% endfor %}
 			</div>
+
 		</div>
 
 	</div>
