@@ -9,6 +9,7 @@ from photos import models
 class PhotoSetAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', )
 
+
 class PhotoAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'image_tag', 'photo_set', 'created', 'image_exif')
 

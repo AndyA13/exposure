@@ -15,7 +15,6 @@ Vagrant.configure("2") do |config|
     salt.run_highstate = true
 
     salt.verbose = true
-    salt.install_type = :daily
 
   end
 

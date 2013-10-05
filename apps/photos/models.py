@@ -27,7 +27,7 @@ class Photo(models.Model):
     title = models.CharField(max_length=200)
     slug = AutoSlugField(populate_from='title', unique=True)
     image = ThumbnailerImageField(upload_to="photos")
-    photo_set = models.ForeignKey(PhotoSet, blank=True, null=True)
+    photo_set = models.ForeignKey(PhotoSet)
     created = models.DateTimeField(default=datetime.utcnow)
     exif = DictionaryField(db_index=True, editable=False)
 
@@ -57,6 +57,7 @@ def photo_delete(sender, instance, **kwargs):
 
     if instance.image:
         instance.image.delete(False)
+
 
 @receiver(post_save, sender=Photo)
 def photo_save(sender, instance, **kwargs):
