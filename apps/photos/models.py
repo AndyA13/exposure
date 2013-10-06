@@ -1,8 +1,7 @@
-from datetime import datetime
-
 from django.db import models
 from django.db.models.signals import post_delete, post_save
 from django.dispatch.dispatcher import receiver
+from django.utils import timezone
 
 from autoslug import AutoSlugField
 from djorm_hstore.fields import DictionaryField
@@ -28,7 +27,7 @@ class Photo(models.Model):
     slug = AutoSlugField(populate_from='title', unique=True)
     image = ThumbnailerImageField(upload_to="photos")
     photo_set = models.ForeignKey(PhotoSet)
-    created = models.DateTimeField(default=datetime.utcnow)
+    created = models.DateTimeField(default=timezone.now)
     exif = DictionaryField(db_index=True, editable=False)
 
     objects = HStoreManager()
@@ -56,7 +55,7 @@ saved_file.connect(generate_aliases_global)
 def photo_delete(sender, instance, **kwargs):
 
     if instance.image:
-        instance.image.delete(False)
+        instance.image.delete(save=False)
 
 
 @receiver(post_save, sender=Photo)
