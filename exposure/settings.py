@@ -145,7 +145,7 @@ try:
     }
     INSTALLED_APPS = INSTALLED_APPS + ('raven.contrib.django.raven_compat', )
 except KeyError:
-    print "Sentry disabled as SENTRY_DSN environment varaiable isn't set."
+    print "** Missing Sentry credentials. SENTRY_DSN must be set."
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
@@ -160,8 +160,8 @@ try:
     STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     THUMBNAIL_DEFAULT_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 except KeyError:
-    print "Missing AWS credentials. S3 storage is disabled, defaulting to filesystem."
-    print "AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY and AWS_STORAGE_BUCKET_NAME must be set for S3 support."
+    print "** Missing AWS credentials. S3 storage is disabled, defaulting to filesystem. " \
+        "AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY and AWS_STORAGE_BUCKET_NAME must be set for S3 support."
 
 
     # Easy-thumbnails options
@@ -207,14 +207,17 @@ DEBUG_TOOLBAR_CONFIG = {
     'INTERCEPT_REDIRECTS': False,
     'SHOW_TOOLBAR_CALLBACK': lambda request: DEBUG,
     'HIDE_DJANGO_SQL': False,
-    'ENABLE_STACKTRACES' : True,
+    'ENABLE_STACKTRACES': True,
 }
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+NOSE_ARGS = ['--nologcapture', '-s', '--with-coverage', '--cover-package', 'exposure,photos,ui']
 
 try:
     DROPBOX_APP_KEY = environ['DROPBOX_APP_KEY']
     DROPBOX_APP_SECRET = environ['DROPBOX_APP_SECRET']
 except KeyError:
-    print "Dropbox integration disabled."
+    print "** Missing Dropbox credentials. DROPBOX_APP_KEY, DROPBOX_APP_SECRET must be set."
 
 try:
     from .settings_local import *

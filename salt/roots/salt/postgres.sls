@@ -9,8 +9,29 @@ postgresql-pkgs:
     - pkgs:
       - libpq-dev
       - postgresql-server-dev-9.1
+      - postgresql-contrib
     - require:
-        - pkg: postgresql
+      - pkg: postgresql
+
+template1-hstore:
+  cmd.run:
+    - name: sudo su -c 'psql -d template1 -c "CREATE EXTENSION IF NOT EXISTS hstore;"' postgres > /dev/null
+    - shell: /bin/bash
+    - require:
+      - pkg: postgresql-pkgs
+
+/etc/postgresql/9.1/main/postgresql.conf:
+  file.append:
+    - text: "listen_addresses = 'localhost'"
+    - require:
+      - pkg: postgresql-pkgs
+
+/etc/postgresql/9.1/main/pg_hba.conf:
+  file:
+    - managed
+    - source: salt://postgres/pg_hba.conf
+    - require:
+      - pkg: postgresql-pkgs
 
 exposure-user:
   postgres_user.present:
@@ -19,7 +40,7 @@ exposure-user:
     - runas: postgres
     - superuser: True
     - require:
-        - pkg: postgresql-pkgs
+      - cmd: template1-hstore
 
 exposure-db:
   postgres_database.present:
@@ -27,17 +48,4 @@ exposure-db:
     - owner: exposure
     - runas: postgres
     - require:
-        - postgres_user: exposure-user
-
-/etc/postgresql/9.1/main/postgresql.conf:
-  file.append:
-    - text: "listen_addresses = 'localhost'"
-    - require:
-        - pkg: postgresql-pkgs
-
-/etc/postgresql/9.1/main/pg_hba.conf:
-  file:
-    - managed
-    - source: salt://postgres/pg_hba.conf
-    - require:
-        - pkg: postgresql-pkgs
+      - postgres_user: exposure-user
