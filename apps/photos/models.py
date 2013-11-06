@@ -24,13 +24,16 @@ class PhotoSet(models.Model):
 
 class Photo(models.Model):
     title = models.CharField(max_length=200)
-    slug = AutoSlugField(populate_from='title', unique=True)
+    slug = AutoSlugField(populate_from='title')
     image = ThumbnailerImageField(upload_to="photos")
-    photo_set = models.ForeignKey(PhotoSet)
+    photo_set = models.ForeignKey(PhotoSet, null=True, blank=True)
     created = models.DateTimeField(default=timezone.now)
     exif = DictionaryField(db_index=True, editable=False)
 
     objects = HStoreManager()
+
+    class Meta:
+        unique_together = ('slug', 'photo_set')
 
     @property
     def size(self):

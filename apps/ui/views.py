@@ -24,10 +24,10 @@ def photo_set(request, photo_set_slug):
 
 def photo_detail(request, photo_set_slug, photo_slug):
 
-    photo_set = get_object_or_404(PhotoSet, slug=photo_set_slug)
-    photo = get_object_or_404(Photo, slug=photo_slug, photo_set=photo_set)
+    #photo_set = get_object_or_404(PhotoSet, slug=photo_set_slug)
+    photo = get_object_or_404(Photo, slug=photo_slug, photo_set__slug=photo_set_slug)
 
     return render(request, 'photo.html', {
-        'photo_set': photo_set,
         'photo': photo,
+        'photo_set': photo.photo_set,
     })
