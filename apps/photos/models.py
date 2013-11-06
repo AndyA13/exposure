@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import post_delete, post_save
 from django.dispatch.dispatcher import receiver
@@ -41,6 +42,13 @@ class Photo(models.Model):
 
     def other_photos_in_set(self):
         return self.photo_set.photo_set.exclude(id__in=[self.id, ])
+
+    @property
+    def detail_url(self):
+        if self.photo_set:
+            return reverse('set_photo_detail', args=[self.photo_set.slug, self.slug])
+        else:
+            return reverse('photo_detail', args=[self.slug])
 
     def update_exif(self):
         self.exif = file_exif(open(self.image.path))

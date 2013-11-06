@@ -7,12 +7,12 @@
 	{% for photo in photo_list %}
 		<div class="gallery-item column-3 {% if forloop.counter0 > 0 and forloop.counter0|divisibleby:"4" %}reset{% endif %}">
 			<div class="gallery-item-image">
-				<a href="{% url 'ui.views.photo_detail' photo_set_slug=photo.photo_set.slug photo_slug=photo.slug %}">
+				<a href="{{ photo.detail_url }}">
 					<img src="{{ MEDIA_URL }}{{ photo.size.small}}" alt="{{ photo.title }}" />
 				</a>
 			</div>
 			<div class="gallery-item-meta">
-				<a href="{% url 'ui.views.photo_detail' photo.photo_set.slug photo.slug %}">
+				<a href="{{ photo.detail_url }}">
 					{{ photo.title }}
 				</a>
 			</div>
