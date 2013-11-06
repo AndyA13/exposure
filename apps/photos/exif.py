@@ -11,6 +11,7 @@ def file_exif(f):
     # Return Exif tags
     tags = exifread.process_file(f)
 
-    tags.pop('JPEGThumbnail')
+    if 'JPEGThumbnail' in tags:
+        tags.pop('JPEGThumbnail')
 
     return tags

@@ -23,4 +23,3 @@ djorm-ext-hstore==0.5
 nose
 django-nose
 coverage
-factory_boy

@@ -43,8 +43,6 @@ class Photo(models.Model):
         self.exif = file_exif(open(self.image.path))
 
     def __unicode__(self):
-        self.update_exif()
-
         return self.title
 
 
@@ -61,6 +59,7 @@ def photo_delete(sender, instance, **kwargs):
 @receiver(post_save, sender=Photo)
 def photo_save(sender, instance, **kwargs):
 
-    if not instance.exif:
-        instance.update_exif()
-        instance.save()
+    return
+
+    #if not instance.exif:
+        #instance.save()
